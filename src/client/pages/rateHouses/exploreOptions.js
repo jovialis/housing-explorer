@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import {HouseCardList} from "../../components/housecardlist";
-import GoogleMapCard from "../../components/googleMapCard";
-import axios from "axios";
-import ErrorBase from "../../components/error";
+
 import {
     Card,
     CardBody,
