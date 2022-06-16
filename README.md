@@ -11,10 +11,15 @@ Regardless, the project works. It looks pretty good.
 It is hosted on an AWS EB instance.
 
 ## Required Environmental Variables
+
 ```MONGODB_URI```: Database connection URI
+
 ```NODE_ENV```: Flag the production status (development/production)
+
 ```SESSION_SECRET```: Cookie session secret
+
 ```SESSION_DOMAIN```: Cookie domain
+
 ```PORT```: Port to host the server on
 
 ## Commands
