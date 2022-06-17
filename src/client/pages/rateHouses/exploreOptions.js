@@ -171,7 +171,10 @@ export default function ExploreOptions ({setRatingStatus, houses, nextState}) {
                                 {curHouse.bedrooms} bd | {curHouse.bathrooms} ba | {curHouse.sqft} sqft
                             </p>
                         </CardHeader>
-                        <ModalBody>
+                        <ModalBody style={{
+                            maxHeight: 'calc(100vh - 300px)',
+                            overflowY: 'auto'
+                        }}>
                             <Container>
                                 <Row>
                                     {curHouse.photos.map(p => {

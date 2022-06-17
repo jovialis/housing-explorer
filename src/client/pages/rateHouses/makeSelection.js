@@ -10,14 +10,13 @@ import {
     ModalHeader,
     Col,
     Container,
-    Modal,
     ModalBody,
     Row,
     ModalFooter, Button, Alert, CardHeader, CardFooter, Collapse, Badge, CardSubtitle, FormCheckbox
 } from "shards-react";
 import HouseCard from "../../components/houseCard";
 import {func} from "prop-types";
-import {Image} from "react-bootstrap";
+import {Modal} from "react-bootstrap";
 
 const CardMargins = styled.div`
     margin-bottom: 2rem;
@@ -142,7 +141,7 @@ export default function MakeSelection({setRatingStatus, houses, nextState, promp
                     </div>
                 </Col>
             </Row>
-            <Modal size={"lg"} open={!!curHouse} toggle={() => setCurHouse(null)} backdrop className={"modal-dialog-scrollable"} >
+            <Modal size={"lg"} show={!!curHouse} onHide={() => setCurHouse(null)} backdrop className={"modal-dialog-scrollable"} scrollable>
                 {!!curHouse && (
                     <React.Fragment>
                         <CardHeader>
@@ -162,7 +161,10 @@ export default function MakeSelection({setRatingStatus, houses, nextState, promp
                                 {curHouse.bedrooms} bd | {curHouse.bathrooms} ba | {curHouse.sqft} sqft
                             </p>
                         </CardHeader>
-                        <ModalBody>
+                        <ModalBody style={{
+                            maxHeight: 'calc(100vh - 300px)',
+                            overflowY: 'auto'
+                        }}>
                             <Container>
                                 <Row>
                                     {curHouse.photos.map(p => {
@@ -197,7 +199,7 @@ export default function MakeSelection({setRatingStatus, houses, nextState, promp
                     </React.Fragment>
                 )}
             </Modal>
-            <Modal size={"lg"} open={showTutorial} backdrop>
+            <Modal size={"lg"} show={showTutorial} backdrop>
                 <ModalHeader>
                     {prompt}
                 </ModalHeader>
