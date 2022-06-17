@@ -11,13 +11,12 @@ import {
     CardTitle,
     Col,
     Container,
-    Form,
     FormGroup,
     FormInput,
     Row,
     Alert
 } from "shards-react";
-import {FormLabel} from "react-bootstrap";
+import {FormLabel, Form} from "react-bootstrap";
 
 /*******************************************************************/
 
@@ -108,34 +107,36 @@ export default function LoginPage({updateStatus, setRespondent}) {
             <Row>
                 <Col>
                     <Card>
-                        <CardHeader>
-                            Sign In
-                        </CardHeader>
-                        <CardBody>
-                            <CardTitle>Housing Explorer</CardTitle>
-                            <p>Welcome! This is part of our housing survey. This platform gives you a chance to explore houses throughout the country and tell us your favorite.</p>
-                            <p>To continue, please enter the unique, 9-digit ID that was provided to you.</p>
-                            <Form>
-                                <FormLabel><b>Your 9-Digit ID</b></FormLabel>
-                                <FormInput
-                                    placeholder={"e.g. 123456789"}
-                                    value={respondentId}
-                                    onChange={e => {
-                                        setRespondentId(e.target.value);
-                                        setError(null);
-                                        validate(e.target.value);
-                                    }}
-                                    name="name"
-                                    invalid={!valid}
-                                />
-                            </Form>
-                        </CardBody>
-                        <CardFooter>
-                            <Button
-                                disabled={!valid}
-                                onClick={submit}
-                            >Continue</Button>
-                        </CardFooter>
+                        <Form onSubmit={submit}>
+                            <CardHeader>
+                                Sign In
+                            </CardHeader>
+                            <CardBody>
+                                <CardTitle>Housing Explorer</CardTitle>
+                                <p>Welcome! This is part of our housing survey. This platform gives you a chance to explore houses throughout the country and tell us your favorite.</p>
+                                <p>To continue, please enter the unique, 9-digit ID that was provided to you.</p>
+                                    <FormLabel><b>Your 9-Digit ID</b></FormLabel>
+                                    <FormInput
+                                        placeholder={"e.g. 123456789"}
+                                        value={respondentId}
+                                        onChange={e => {
+                                            setRespondentId(e.target.value);
+                                            setError(null);
+                                            validate(e.target.value);
+                                        }}
+                                        // name="r"
+                                        invalid={!valid}
+                                    />
+                            </CardBody>
+                            <CardFooter>
+                                <Button
+                                    disabled={!valid}
+                                    onClick={submit}
+                                >
+                                    Continue
+                                </Button>
+                            </CardFooter>
+                        </Form>
                         <Alert
                             dismissible={() => {
                                 setError(null);

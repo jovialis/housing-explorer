@@ -12,10 +12,10 @@ import {
     CardTitle,
     Col,
     Container,
-    Form, FormInput,
+    FormInput,
     Row
 } from "shards-react";
-import {FormLabel} from "react-bootstrap";
+import {FormLabel, Form} from "react-bootstrap";
 
 /*************************************************************************/
 
@@ -93,37 +93,37 @@ export default function SelectZipPage({updateStatus, updateZIP}) {
             <Row>
                 <Col>
                     <Card>
-                        <CardHeader>
-                            Enter ZIP
-                        </CardHeader>
-                        <CardBody>
-                            <CardTitle>Housing Explorer</CardTitle>
-                            <p>Awesome! Let's get started.</p>
-                            <p>We're going to show you houses throughout the country. Please enter your 5-digit ZIP code.</p>
-                            <Form>
-                                <FormLabel>
-                                    <b>Your ZIP Code</b>
-                                </FormLabel>
-                                <FormInput
-                                    placeholder={"e.g. 12345"}
-                                    value={zip}
-                                    onChange={e => {
-                                        setZip(e.target.value);
-                                        setError(null);
-                                        validate(e.target.value);
-                                    }}
-                                    name="postal"
-                                    invalid={!valid}
-                                />
-                                <small>This information cannot be traced back to you and is collected for demographic purposes only.</small>
-                            </Form>
-                        </CardBody>
-                        <CardFooter>
-                            <Button
-                                disabled={!valid}
-                                onClick={submit}
-                            >Continue</Button>
-                        </CardFooter>
+                        <Form onSubmit={submit}>
+                            <CardHeader>
+                                Enter ZIP
+                            </CardHeader>
+                            <CardBody>
+                                <CardTitle>Housing Explorer</CardTitle>
+                                <p>Awesome! Let's get started.</p>
+                                <p>We're going to show you houses throughout the country. Please enter your 5-digit ZIP code.</p>
+                                    <FormLabel>
+                                        <b>Your ZIP Code</b>
+                                    </FormLabel>
+                                    <FormInput
+                                        placeholder={"e.g. 12345"}
+                                        value={zip}
+                                        onChange={e => {
+                                            setZip(e.target.value);
+                                            setError(null);
+                                            validate(e.target.value);
+                                        }}
+                                        // name="z"
+                                        invalid={!valid}
+                                    />
+                                    <small>This information cannot be traced back to you and is collected for demographic purposes only.</small>
+                            </CardBody>
+                            <CardFooter>
+                                <Button
+                                    disabled={!valid}
+                                    onClick={submit}
+                                >Continue</Button>
+                            </CardFooter>
+                        </Form>
                         <Alert
                             dismissible={() => {
                                 setError(null);
