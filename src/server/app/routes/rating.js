@@ -18,16 +18,10 @@ const IncompleteRating = mongoose.model('IncompleteRating');
   * @return {200 || 403}
   */
 router.post('/', async (req, res, next) => {
-
+    
     // No repsondent? Not allowed
     if (!req.session.respondent) {
         return res.status(401).send({error: "Not logged in."});
-    }
-
-    // Prevent double rating
-    const existingRating = await Rating.findOne({respondent: req.session.respondent});
-    if (existingRating) {
-        return res.status(401).send({error: "Cannot submit two entries."});
     }
 
     // Make sure there has been a Home Sample generated.
@@ -73,10 +67,15 @@ router.post('/', async (req, res, next) => {
         return res.status(400).json({error: "An error occurred while looking up one of the addresses."});
     }
 
+    // Prevent double rating
+    if (await Rating.exists({respondent: req.session.respondent})) {
+        return res.status(401).send({error: "Cannot submit two entries."});
+    }
+
     // Generate the rating
     await Rating.create(ratingSchema);
 
-    console.log(`Saved the rating for respondent ${req.session.respondentId}.`);
+    console.log(`Saved the rating for respondent ${req.session.respondent.respondentId}.`);
     return res.status(200).json({state: "completed"});
 });
 
